@@ -10,7 +10,14 @@
         <a href='/logout'>logout</a>
         <a href='/join'>join</a>
         <a href='/withdraw'>withdraw</a>
+
         <h4>{{ message }}</h4>
+        
+        <form action='/login' method='POST'>
+            <p><input type='text' name='id' placeholder='user id'></p>
+            <p><input type='password' name='pw' placeholder='password'></p>
+            <p><button type='submit'>로그인</button></p>
+        </form>
         <h3>{{ title }}</h3>
         {{ content }}
     </body>
