@@ -9,9 +9,16 @@
         <a href='/login'>login</a>
         <a href='/logout'>logout</a>
         <a href='/join'>join</a>
-        <a href='/withdraw'>withdraw</a>
+        <a href='/withdraw'>withdraw</a><br><br>
+        <a href='/write'>write</a>
+        <a href='/update/{{id}}'>update</a>
+        <a href='/delete/{{id}}'>delete</a>
+
         <h4>{{ message }}</h4>
         <h3>{{ title }}</h3>
         {{ content }}
+        <ol>
+            {{ menu | safe}}
+        </ol>
     </body>
 </html>
