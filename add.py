@@ -171,7 +171,6 @@ def write():
                             id='wrong number',
                             menu=get_menu(),
                             message=message)
-
     return render_template('write.html',
                             owner=who_am_i(),
                             id='wrong number',
