@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>web</title>
+        <meta charset='utf-8'>
+    </head>
+    <body>
+        <h1><a href='/'>Hellow  {{ owner }}</a></h1>
+        <a href='/login'>login</a>
+        <a href='/logout'>logout</a>
+        <a href='/join'>join</a>
+        <a href='/withdraw'>withdraw</a><br><br>
+        <a href='/write'>write</a>
+        <a href='/update/{{id}}'>update</a>
+        <a href='/delete/{{id}}'>delete</a>
+
+        <h4>{{ message }}</h4>
+
+        <h3>{{ title }}</h3>
+        {{ content }}
+        
+        <form action='/update/{{id}}' method='POST'>
+            <!-- <p><input type='text' name='title' placeholder='제목을 변경하세요' autofocus required></p> -->
+            <p><textarea name="content" placeholder="내용을 수정 하세요." required></textarea></p>
+            <p><button type='submit'>게시판 글수정</button></p>
+        
+        <ol>
+            {{ menu | safe}}
+        </ol>
+    </body>
+</html>

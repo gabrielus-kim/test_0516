@@ -99,7 +99,50 @@ def delete_post(id):
                             menu=get_menu(),
                             id='wrong number',
                             message=message) 
-    
+
+@app.route('/update/<id>', methods=['GET','POST'])
+def update_post(id):
+    if am_I_here() == False:
+        message="게시판 변경은 log in 후 가능합니다."
+        return render_template('template.html',
+                                owner=who_am_i(),
+                                id='wrong number',
+                                message=message) 
+    if id == 'wrong number':    
+        message='게시물 조회후 내용 수정이 가능합니다.'
+        return render_template('template.html',
+                                owner=who_am_i(),
+                                id='wrong number',
+                                menu=get_menu(),
+                                message=message)  
+    if request.method == 'POST':
+        cur=db.cursor()
+        cur.execute(f"""
+            update topic set description='{request.form['content']}'
+            where id ='{id}'
+            """)
+        db.commit() 
+        cur=db.cursor()
+        message="수정한 내용이 반영되었읍니다."
+        return render_template('template.html',
+                            owner=who_am_i(),
+                            id='wrong number',
+                            menu=get_menu(),
+                            message=message) 
+    else:
+        message='내용 수정이 가능합니다.'
+        cur=db.cursor()
+        cur.execute(f"""
+            select id, title, description from topic where id ='{id}'
+        """)
+        title=cur.fetchone()
+    return render_template('update.html',
+                    owner=who_am_i(),
+                    id=title['id'],
+                    title=title['title'],
+                    content=title['description'],
+                    message=message) 
+
 @app.route('/write', methods=['GET','POST'])
 def write():
     if am_I_here() == False:
@@ -201,7 +244,9 @@ def join():
     return render_template('join.html',
                             owner=who_am_i(),
                             id='wrong number',
+                            
                             message=message)
+
 @app.route('/withdraw')
 def withdraw():
     if am_I_here() == False:
